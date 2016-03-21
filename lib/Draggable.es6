@@ -140,22 +140,31 @@ export default class Draggable extends React.Component {
     zIndex: NaN
   };
 
+  constructor(options) {
+    super(options);
+
+    this.state = {
+      // Whether or not we are currently dragging.
+      dragging: false,
+
+      // Whether or not we have been dragged before.
+      dragged: false,
+
+      // Current transform x and y.
+      clientX: this.props ? this.props.start.x : 0, clientY: this.props ? this.props.start.y : 0,
+
+      // Used for compensating for out-of-bounds drags
+      slackX: 0, slackY: 0,
+
+      // Can only determine if SVG after mounting
+      isElementSVG: false
+    };
+  }
+
+  /*
   state: DraggableState = {
-    // Whether or not we are currently dragging.
-    dragging: false,
-
-    // Whether or not we have been dragged before.
-    dragged: false,
-
-    // Current transform x and y.
-    clientX: this.props ? this.props.start.x : 0, clientY: this.props ? this.props.start.y : 0,
-
-    // Used for compensating for out-of-bounds drags
-    slackX: 0, slackY: 0,
-
-    // Can only determine if SVG after mounting
-    isElementSVG: false
   };
+  */
 
   componentDidMount() {
     // Check to see if the element passed is an instanceof SVGElement
